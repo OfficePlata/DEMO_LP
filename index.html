@@ -8,85 +8,41 @@
             font-family: Arial, sans-serif;
             padding: 20px;
             background: #f4f4f4;
+            text-align: center;
         }
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
+        iframe {
             max-width: 100%;
-        }
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="text"], input[type="email"], select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        input[type="submit"] {
-            width: 100%;
-            padding: 15px;
-            background: #eed860;
-            color: white;
+            height: 500px;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
-        input[type="submit"]:hover {
-            background: #fcf7df;
-        }
-        @media (min-width: 600px) {
-            form {
-                max-width: 500px;
+        @media (max-width: 600px) {
+            iframe {
+                height: 400px;
             }
         }
     </style>
 </head>
 <body>
-    <form id="surveyForm">
-        <label>
-            評価 (必須):
-            <select name="rating" required>
-                <option value="">選択してください</option>
-                <option value="1">1非常に不満</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5非常に満足</option>
-            </select>
-        </label>
-        <label>
-            ご意見ご要望をお聞かせください (任意):
-            <textarea name="feedback"></textarea>
-        </label>
-        <label>
-            改善の提案 (任意):
-            <textarea name="suggestions"></textarea>
-        </label>
-        <label>
-            お名前 (任意):
-            <input type="text" name="name">
-        </label>
-        <label>
-            メールアドレス (任意):
-            <input type="email" name="email">
-        </label>
-        <input type="submit" value="送信">
-    </form>
+    <iframe id="googleForm" src="https://forms.gle/1P4oWxs7n7cWr7wo8"></iframe>
 
     <script>
-        document.getElementById('surveyForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var formData = new FormData(this);
-            google.script.run.withSuccessHandler(function() {
-                alert('アンケートを送信しました。');
-                document.getElementById('surveyForm').reset();
-            }).processForm(formData);
-        });
+        var formIframe = document.getElementById('googleForm');
+
+        formIframe.onload = function() {
+            try {
+                if (formIframe.contentWindow.location.href.includes("formResponse")) {
+                    // 感謝のメッセージを表示
+                    alert("アンケートへのご協力ありがとうございました。");
+
+                    // ここで少し待ってからGoogle口コミページにリダイレクト
+                    setTimeout(function() {
+                        window.location.href = "https://www.google.com/maps/place/%E9%8A%80%E5%A4%A9%E3%82%86%E3%81%9A%E3%82%84/@31.9116843,131.4190239,17z/data=!3m1!4b1!4m6!3m5!1s0x3538b73027dd7ec3:0x8442c2caf0e4eb6e!8m2!3d31.9116798!4d131.4215988!16s%2Fg%2F11h0ym78bw?hl=ja&entry=ttu";
+                    }, 3000); // 3秒後にリダイレクト
+                }
+            } catch (error) {
+                console.error("Error: ", error);
+            }
+        };
     </script>
 </body>
 </html>
