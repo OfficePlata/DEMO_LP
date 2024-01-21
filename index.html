@@ -23,29 +23,16 @@
     </style>
 </head>
 <body>
-    <iframe id="googleForm" src="https://forms.gle/1P4oWxs7n7cWr7wo8"></iframe>
+    <iframe id="googleForm" src="https://forms.gle/1P4oWxs7n7cWr7wo8" style="width: 100%; height: 500px; border: none;"></iframe>
+
+    <!-- ボタンを追加 -->
+    <button id="submitBtn" style="margin-top: 20px;">アンケート送信後こちらをクリックしてください</button>
 
     <script>
-    var formIframe = document.getElementById('googleForm');
-
-    formIframe.onload = function() {
-        try {
-            // URLの読み取りには同じオリジンポリシーの制約があります
-            if (formIframe.contentWindow.location.href.includes("formResponse")) {
-                // 感謝のメッセージを表示
-                alert("アンケートへのご協力ありがとうございました。");
-
-                // 3秒後にリダイレクト
-                setTimeout(function() {
-                    window.location.href = "https://g.page/r/CaouaaehSFuXEBM/review";
-                }, 1000); // 1000ミリ秒 = 1秒
-            }
-        } catch (error) {
-            // エラー処理
-            console.error("Error: ", error);
-        }
-    };
-</script>
-
+        document.getElementById('submitBtn').onclick = function() {
+            // ボタンクリック後にリダイレクト
+            window.location.href = "https://g.page/r/CaouaaehSFuXEBM/review";
+        };
+    </script>
 </body>
 </html>
