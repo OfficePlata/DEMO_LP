@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>フィードバックフォーム</title>
+</head>
+<body>
+    <iframe id="surveyForm" src="https://forms.gle/1P4oWxs7n7cWr7wo8" width="640" height="480"></iframe>
+    <script>
+        // Googleフォームのiframeを取得
+        var formIframe = document.getElementById('surveyForm');
+
+        // iframeのloadイベントを監視
+        formIframe.onload = function() {
+            // URLがGoogleフォームの送信完了ページを指しているか確認
+            if (formIframe.src.includes('formResponse') || formIframe.src.includes('thankyou')) {
+                // Google口コミページにリダイレクト
+                window.location.href = 'https://www.google.com/maps/place/%E9%8A%80%E5%A4%A9%E3%82%86%E3%81%9A%E3%82%84/@31.9116843,131.4190239,17z/data=!3m1!4b1!4m6!3m5!1s0x3538b73027dd7ec3:0x8442c2caf0e4eb6e!8m2!3d31.9116798!4d131.4215988!16s%2Fg%2F11h0ym78bw?hl=ja&entry=ttu';ここにGoogle口コミページのURLを入れてください
+            }
+        };
+    </script>
+</body>
+</html>
