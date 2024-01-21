@@ -4,7 +4,31 @@
     <title>フィードバックフォーム</title>
 </head>
 <body>
-    <iframe id="surveyForm" src="https://forms.gle/1P4oWxs7n7cWr7wo8" width="640" height="480"></iframe>
-    <p>アンケートのご協力ありがとうございます。もしよろしければ、<a href="https://www.google.com/maps/place/%E9%8A%80%E5%A4%A9%E3%82%86%E3%81%9A%E3%82%84/@31.9116843,131.4190239,17z/data=!3m1!4b1!4m6!3m5!1s0x3538b73027dd7ec3:0x8442c2caf0e4eb6e!8m2!3d31.9116798!4d131.4215988!16s%2Fg%2F11h0ym78bw?hl=ja&entry=ttu">こちらのGoogle口コミページ</a>にもご意見をお寄せください。</p>
+    <form id="feedbackForm">
+        <label for="name">名前：</label>
+        <input type="text" id="name" name="name"><br><br>
+
+        <label for="feedback">フィードバック：</label>
+        <textarea id="feedback" name="feedback"></textarea><br><br>
+
+        <input type="submit" value="送信">
+    </form>
+
+    <script>
+        document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            var formData = {
+                name: document.getElementById("name").value,
+                feedback: document.getElementById("feedback").value
+            };
+
+            google.script.run
+                .withSuccessHandler(function(response) {
+                    window.location.href = 'リダイレクト先のURL';
+                })
+                .processForm(formData);
+        });
+    </script>
 </body>
 </html>
